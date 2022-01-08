@@ -1,15 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Convert from './components/Convert';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
+
+const queryClient = new QueryClient()
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-          Learning Typescript
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <header className="App-header">
+            <Convert />
+        </header>
+      </div>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
