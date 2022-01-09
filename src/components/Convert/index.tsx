@@ -13,8 +13,7 @@ function Convert () {
     const { data: codes, isLoading } = useQuery("getCodes", getSupportedCodes);
 
     const onPress = () => {
-        console.log('From: ' + fromCountry);
-        console.log('To: ' + toCountry);
+        
     };
 
 

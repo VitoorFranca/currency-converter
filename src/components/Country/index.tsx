@@ -15,7 +15,6 @@ function Country({ countries, country, setCountry }: Props) {
 
   const onSelectCountry = () => {
     if(!selectRef.current?.selectedIndex) return
-    console.log((countries && countries[selectRef.current?.selectedIndex]))
     setCountry(countries && countries[selectRef.current?.selectedIndex]);
 
   };
@@ -26,7 +25,7 @@ function Country({ countries, country, setCountry }: Props) {
     <form>
       <select onChange={() => onSelectCountry()} ref={selectRef}>
         {countries.map((CountryDetails: Array<CountryDetailsProps>, i) => (
-          <option key={i}>{country[0]} - {country[1]}</option>
+          <option key={i}>{CountryDetails[0]} - {CountryDetails[1]}</option>
         ))}
       </select>
     </form>
