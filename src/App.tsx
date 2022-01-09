@@ -5,6 +5,8 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
+import '../src/styles/global.css'
+
 const queryClient = new QueryClient()
 
 function App() {

@@ -12,6 +12,7 @@ function Convert () {
     const [fromCountry, setFromCountry] = React.useState<String[]>(["AED","UAE Dirham"]);
     const [toCountry, setToCountry] = React.useState<String[]>(["AFN","Afghan Afghani"]);
     const [amount, setAmount] = React.useState<number>(1);
+    const [currency, setCurrency] = React.useState<String>('');
 
 
     const { data: codes, isLoading } = useQuery("getCodes", getSupportedCodes);
@@ -23,12 +24,9 @@ function Convert () {
             amount
         };
 
-        //const query = useQuery("converter", async () => converterPair(data));
-
         converterPair(data)
-            .then(res => console.log(res))
+            .then(res => setCurrency(`${res.conversion_result}`))
         
-        //console.log(query)
     };
 
     React.useEffect(() => {
@@ -37,32 +35,41 @@ function Convert () {
 
 
     return (
-        <>
-            <AmountInput
-                amount={amount}
-                setAmount={setAmount}
-            />
+        <section className='container'>
+            <div className='options-container'>
+                <AmountInput
+                    amount={amount}
+                    setAmount={setAmount}
+                />
 
-            <Country
-                isLoading={isLoading}
-                country={fromCountry}
-                setCountry={setFromCountry}
-                countries={codes}
-            />
+                <Country
+                    isLoading={isLoading}
+                    country={fromCountry}
+                    setCountry={setFromCountry}
+                    countries={codes}
+                />
 
-            <Country
-                isLoading={isLoading}
-                country={toCountry}
-                setCountry={setToCountry}
-                countries={codes}
-            />
+                <Country
+                    isLoading={isLoading}
+                    country={toCountry}
+                    setCountry={setToCountry}
+                    countries={codes}
+                />
+            </div>
 
-            <BlueButton
-                onPress={onPress}
-                isLoading={false}>
-                    Calcular
-            </BlueButton>
-        </>
+            <div className='box-button'>
+                <BlueButton
+                    onPress={onPress}
+                    isLoading={false}>
+                        Calcular
+                </BlueButton>
+            </div>
+
+            <span className='currency-box'>
+                <p className='currency'>{currency && currency}</p>
+            </span>
+
+        </section>
     );
 };
 
