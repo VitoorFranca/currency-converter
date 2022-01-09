@@ -5,24 +5,26 @@ import { getSupportedCodes } from "../../services/codes";
 import Country from '../Country';
 
 function Convert () {
-    const [fromCountry, setFromCountry] = React.useState<String[]>([]);
-    const [toCountry, setToCountry] = React.useState<String[]>([]);
+    const [fromCountry, setFromCountry] = React.useState<String[]>(["AED","UAE Dirham"]);
+    const [toCountry, setToCountry] = React.useState<String[]>(["AFN","Afghan Afghani"]);
 
 
-    const { data: codes } = useQuery("getCodes", getSupportedCodes);
+    const { data: codes, isLoading } = useQuery("getCodes", getSupportedCodes);
 
 
     return (
         <>
             <Country
+                isLoading={isLoading}
                 country={fromCountry}
                 setCountry={setFromCountry}
-                contries={codes} />
+                countries={codes} />
 
             <Country
+                isLoading={isLoading}
                 country={toCountry}
                 setCountry={setToCountry}
-                contries={codes} />
+                countries={codes} />
         </>
     );
 };
