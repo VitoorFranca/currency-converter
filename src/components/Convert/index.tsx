@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from "react-query";
 import { getSupportedCodes } from "../../services/codes";
 
+import BlueButton from '../BlueButton';
 import Country from '../Country';
 
 function Convert () {
@@ -10,6 +11,11 @@ function Convert () {
 
 
     const { data: codes, isLoading } = useQuery("getCodes", getSupportedCodes);
+
+    const onPress = () => {
+        console.log('From: ' + fromCountry);
+        console.log('To: ' + toCountry);
+    };
 
 
     return (
@@ -25,6 +31,8 @@ function Convert () {
                 country={toCountry}
                 setCountry={setToCountry}
                 countries={codes} />
+
+            <BlueButton onPress={onPress} isLoading={false}>Calcular</BlueButton>
         </>
     );
 };
