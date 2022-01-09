@@ -1,19 +1,28 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getSupportedCodes } from "../../services/codes";
 
-type propsType = {};
 
-function Country(props: propsType) {
-  const { data: codes } = useQuery("getCodes", getSupportedCodes);
+type Props = {
+  contries: Array<[]> | undefined,
+  country: String[],
+  setCountry: Function
+};
 
-  if (!codes?.length) return <p>Loading</p>;
+type CountryDetailsProps = Array<String>;
+
+function Country({ contries, country, setCountry }: Props) {
+
+  const onSelectCountry = (CountryDetails: Array<CountryDetailsProps>) => {
+    setCountry(CountryDetails);
+
+  };
+
+  if (!contries?.length) return <p>Loading</p>;
 
   return (
     <form>
       <select>
-        {codes.map((details: Array<string>) => (
-          <option key={details[0]} value={details[0]}>{details[1]}</option>
+        {contries.map((CountryDetails: Array<CountryDetailsProps>, i) => (
+          <option key={i} onClick={() => onSelectCountry(CountryDetails)}>{country[0]} - {country[1]}</option>
         ))}
       </select>
     </form>
